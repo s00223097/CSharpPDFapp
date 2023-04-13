@@ -7,4 +7,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="PDFTron.NET.x64" Version="10.0.0" />
+  </ItemGroup>
+
 </Project>
