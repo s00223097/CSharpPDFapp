@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using PdfReader;
+using CSharpPDFapp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 namespace CSharpPDFapp
 {
     /// <summary>
@@ -22,7 +23,7 @@ namespace CSharpPDFapp
     public partial class PdfReaderWindow : Window
     {
         private PdfDocument pdfDocument;
-        private FlowDocumentReader pdfReader;
+        //private FlowDocumentReader pdfReader;
 
         public PdfReaderWindow()
         {
@@ -42,7 +43,7 @@ namespace CSharpPDFapp
                 }
                 pdfDocument = new PdfDocument(openFileDialog.FileName);
                 pdfDocument.LoadPdfDocument();
-                pdfDocument.DisplayPdfDocument(pdfReader);
+                pdfDocument.DisplayPdfDocument(pdfReader); // this being the pdfReader declared in the window class
             }
         }
 
@@ -57,49 +58,3 @@ namespace CSharpPDFapp
         }
     }
 }
-/*
-using Microsoft.Win32;
-
-namespace PdfReader
-{
-    public partial class PdfReaderWindow : Window
-    {
-        private PdfDocument pdfDocument;
-
-        public PdfReaderWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void OpenPdfDocument_Click(object sender, RoutedEventArgs e)
-        {
-            // Open PDF document and display in FlowDocumentReader control
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                if (pdfDocument != null)
-                {
-                    pdfDocument.ClosePdfDocument();
-                }
-                pdfDocument = new PdfDocument(openFileDialog.FileName);
-                pdfDocument.LoadPdfDocument();
-                pdfDocument.DisplayPdfDocument(pdfReader);
-            }
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            // Close PDF document and exit application
-            if (pdfDocument != null)
-            {
-                pdfDocument.ClosePdfDocument();
-            }
-            Application.Current.Shutdown();
-        }
-    }
-}
-
-
-
-*/
