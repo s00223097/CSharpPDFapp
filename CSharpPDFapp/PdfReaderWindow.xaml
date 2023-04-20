@@ -18,5 +18,6 @@
             </MenuItem>
         </Menu>
         <FlowDocumentReader Grid.Row="1" Margin="10" Name="pdfReader"/>
+        <Button x:Name="btnBookmark" Content="Bookmark" HorizontalAlignment="Left" Margin="720,5,0,0" Grid.Row="1" VerticalAlignment="Top" Height="34" Width="70" Click="btnBookmark_Click"/>
     </Grid>
 </Window>

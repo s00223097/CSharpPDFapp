@@ -14,20 +14,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Mess
 
 namespace CSharpPDFapp
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
+    public abstract class DocumentPaginator { }
     public partial class PdfReaderWindow : Window
     {
+        // declare variables
         private PdfDocument pdfDocument;
-        //private FlowDocumentReader pdfReader;
 
+        private Dictionary<int, string> bookmarks = new Dictionary<int, string>();
+
+        private int currentPageNumber;
         public PdfReaderWindow()
         {
             InitializeComponent();
+            pdfReader.PageNumberChanged += PdfReader_PageNumberChanged; // keep track of page number 
         }
 
         private void OpenPdfDocument_Click(object sender, RoutedEventArgs e)
@@ -55,6 +61,20 @@ namespace CSharpPDFapp
                 pdfDocument.ClosePdfDocument();
             }
             Application.Current.Shutdown();
+        }
+
+        private void PdfReader_PageNumberChanged(object sender, EventArgs e)
+        {
+            FlowDocumentPaginator paginator = ((FlowDocument)pdfReader.Document).Paginator as FlowDocumentPaginator;
+            currentPageNumber = (paginator.GetPageNumber(pdfReader.Document.ContentStart) + 1); // add 1 because page numbers start from 1, not 0
+
+            //currentPageNumber = pdfReader.MasterPageNumber;
+        }
+
+        private void btnBookmark_Click(object sender, RoutedEventArgs e)
+        {
+            string bookmarkName = Microsoft.VisualBasic.Interaction.InputBox("Enter a name for the bookmark:", "Bookmark", "");
+            bookmarks[currentPageNumber] = bookmarkName;
         }
     }
 }
